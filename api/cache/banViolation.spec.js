@@ -60,7 +60,7 @@ describe('banViolation', () => {
       violation_count: 0,
     };
     process.env.BAN_VIOLATIONS = 'true';
-    process.env.BAN_DURATION = '7200000'; // 2 hours in ms
+    process.env.BAN_DURATION = '2'; // 2 hours in ms
     process.env.BAN_INTERVAL = '20';
   });
 

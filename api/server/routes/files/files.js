@@ -1,5 +1,6 @@
 const fs = require('fs').promises;
 const express = require('express');
+const path = require('path');
 const { EnvVar } = require('@librechat/agents');
 const {
   isUUID,
@@ -22,6 +23,8 @@ const { getFiles } = require('~/models/File');
 const { logger } = require('~/config');
 
 const router = express.Router();
+
+// Existing Routes
 
 router.get('/', async (req, res) => {
   try {
@@ -196,71 +199,4 @@ router.get('/download/:userId/:file_id', async (req, res) => {
 
     if (checkOpenAIStorage(file.source)) {
       req.body = { model: file.model };
-      const endpointMap = {
-        [FileSources.openai]: EModelEndpoint.assistants,
-        [FileSources.azure]: EModelEndpoint.azureAssistants,
-      };
-      const { openai } = await getOpenAIClient({
-        req,
-        res,
-        overrideEndpoint: endpointMap[file.source],
-      });
-      logger.debug(`Downloading file ${file_id} from OpenAI`);
-      passThrough = await getDownloadStream(file_id, openai);
-      setHeaders();
-      logger.debug(`File ${file_id} downloaded from OpenAI`);
-      passThrough.body.pipe(res);
-    } else {
-      fileStream = getDownloadStream(file_id);
-      setHeaders();
-      fileStream.pipe(res);
-    }
-  } catch (error) {
-    logger.error('Error downloading file:', error);
-    res.status(500).send('Error downloading file');
-  }
-});
-
-router.post('/', async (req, res) => {
-  const metadata = req.body;
-  let cleanup = true;
-
-  try {
-    filterFile({ req });
-
-    metadata.temp_file_id = metadata.file_id;
-    metadata.file_id = req.file_id;
-
-    if (isAgentsEndpoint(metadata.endpoint)) {
-      return await processAgentFileUpload({ req, res, metadata });
-    }
-
-    await processFileUpload({ req, res, metadata });
-  } catch (error) {
-    let message = 'Error processing file';
-    logger.error('[/files] Error processing file:', error);
-
-    if (error.message?.includes('file_ids')) {
-      message += ': ' + error.message;
-    }
-
-    // TODO: delete remote file if it exists
-    try {
-      await fs.unlink(req.file.path);
-      cleanup = false;
-    } catch (error) {
-      logger.error('[/files] Error deleting file:', error);
-    }
-    res.status(500).json({ message });
-  }
-
-  if (cleanup) {
-    try {
-      await fs.unlink(req.file.path);
-    } catch (error) {
-      logger.error('[/files] Error deleting file after file processing:', error);
-    }
-  }
-});
-
-module.exports = router;
+      const endpointMap =

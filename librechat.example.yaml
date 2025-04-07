@@ -12,7 +12,7 @@ cache: true
 
 # Custom interface configuration
 interface:
-  customWelcome: "Welcome to LibreChat! Enjoy your experience."
+  customWelcome: "TESTTING TESTING"
   # Privacy policy settings
   privacyPolicy:
     externalUrl: 'https://librechat.ai/privacy-policy'
@@ -279,3 +279,22 @@ endpoints:
 #   avatarSizeLimit: 2  # Limit for user avatar image size in MB
 # # See the Custom Configuration Guide for more information on Assistants Config:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
+endpoints:
+  azureOpenAI:
+    titleModel: "gpt-3.5-turbo-1106"
+    plugins: true
+    assistants: true
+    summarize: true
+    summaryModel: "gpt-3.5-turbo-1106"
+    titleConvo: true
+    titleMethod: "functions"
+    groups:
+      - group: "westeurope-gpt3.5"
+        apiKey: "${WESTEUROPE_API_KEY}"
+        instanceName: "NO-OAI-LibreChat"
+        baseURL: "https://NO-OAI-LibreChat.openai.azure.com/"
+        deploymentName: "gpt-35-turbo"
+        version: "2024-03-01-preview"
+        models:
+          gpt-3.5-turbo: true
+

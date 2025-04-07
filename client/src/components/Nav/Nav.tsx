@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, useMemo, memo } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useHistory } from 'react-router-dom'; // Import useHistory for navigation
 import { PermissionTypes, Permissions } from 'librechat-data-provider';
 import type { ConversationListResponse } from 'librechat-data-provider';
 import {
@@ -114,6 +115,12 @@ const Nav = ({
     }
   };
 
+  const history = useHistory(); // Initialize useHistory
+
+  const handleGoToDeepL = () => {
+    history.push('/deepl-translator'); // Navigate to the new page
+  };
+
   return (
     <>
       <div
@@ -154,6 +161,15 @@ const Nav = ({
                     onMouseLeave={handleMouseLeave}
                     ref={containerRef}
                   >
+                    {/* Add the new button */}
+                    <button
+                      type="button"
+                      className="m-1 inline-flex size-10 items-center justify-center rounded-full hover:bg-surface-hover"
+                      onClick={handleGoToDeepL}
+                    >
+                      Go To DeepL Document Translator
+                    </button>
+
                     <NewChat
                       toggleNav={itemToggleNav}
                       isSmallScreen={isSmallScreen}
