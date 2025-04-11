@@ -1,0 +1,11 @@
+{
+  "name": "deeplappreact",
+  "version": "1.0.0",
+  "description": "deeplapp",
+  "main": "App.js",
+  "scripts": {
+    "test": "react-scripts test"
+  },
+  "author": "",
+  "license": "ISC"
+}

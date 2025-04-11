@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: librechat-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: librechat-api
+  template:
+    metadata:
+      labels:
+        app: librechat-api
+    spec:
+      containers:
+      - name: librechat-api
+        image: acrlibre.azurecr.io/librechat-dev-api:latest
+        ports:
+        - containerPort: 3080
+        envFrom:
+        - secretRef:
+            name: librechat-env-secrets
+      restartPolicy: Always

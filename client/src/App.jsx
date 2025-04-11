@@ -1,6 +1,6 @@
 import { RecoilRoot } from 'recoil';
 import { DndProvider } from 'react-dnd';
-import { RouterProvider, createBrowserRouter, Route } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import * as RadixToast from '@radix-ui/react-toast';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -9,13 +9,7 @@ import { ScreenshotProvider, ThemeProvider, useApiErrorBoundary } from './hooks'
 import { ToastProvider } from './Providers';
 import Toast from './components/ui/Toast';
 import { LiveAnnouncer } from '~/a11y';
-import { router as existingRouter } from './routes';
-import DeepLTranslator from './components/DeepLTranslator'; // Import the new component
-
-const router = createBrowserRouter([
-  ...existingRouter.routes, // Spread existing routes
-  { path: '/deepl-translator', element: <DeepLTranslator /> }, // Add new route
-]);
+import { router } from './routes';
 
 const App = () => {
   const { setError } = useApiErrorBoundary();
