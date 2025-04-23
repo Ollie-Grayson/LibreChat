@@ -1,35 +1,45 @@
-/* src/App.css */
-
-/* General styles */
+/* app.css */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
   margin: 0;
+  height: 100vh;
+  min-height: 100vh;
   padding: 0;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .App {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
   padding: 20px;
-  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Light/Dark mode transitions */
+body.dark-mode {
+  background-color: #333; /* Full-page background color in dark mode */
+  color: #ffffff;        /* Ensure text contrast */
+}
+
+body.dark-mode .App {
+  background-color: #222; /* App container background color for dark mode */
+  color: #ffffff;
 }
 
 h1, h2, h3 {
-  color: #333;
+  color: inherit; /* Dynamic color based on the theme */
 }
 
+/* Buttons and components styling */
 button {
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
 button:hover {
@@ -43,109 +53,42 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button.toggle {
-  background-color: #1e88e5;
-  color: white;
-  margin-top: 20px;
-}
-
-button.toggle.dark {
-  background-color: #333;
-  color: white;
-}
-
 input[type="file"] {
   display: none;
 }
 
-/* Landing page styles */
+/* Full background coverage for Translator and Landing containers */
+.translator-container,
 .landing-container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.primary-btn, .secondary-btn {
-  padding: 15px 30px;
-  border-radius: 8px;
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.primary-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-.primary-btn:hover {
-  background-color: #0056b3;
-}
-
-.secondary-btn {
-  background-color: transparent;
-  color: #007bff;
-  border: 2px solid #007bff;
-}
-
-.secondary-btn:hover {
-  background-color: #e7f3ff;
-}
-
-/* Translator page styles */
-.translator-container {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 500px;
-  text-align: center;
-}
-
-input[type="file"] {
-  margin: 20px 0;
-  border: 2px dashed #007bff;
+  background-color: inherit; /* Matches the theme */
+  color: inherit;
+  min-height: 100vh;
   padding: 20px;
-  cursor: pointer;
-  border-radius: 5px;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  height: 100vh;
+  min-height: 100vh;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-input[type="file"]:hover {
-  border-color: #0056b3;
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
 }
 
-/* Dark mode styles */
 body.dark-mode {
   background-color: #333;
+  color: #ffffff;
 }
 
 body.dark-mode .App {
   background-color: #222;
-  color: white;
-}
-
-body.dark-mode .translator-container {
-  background-color: #444;
-  color: white;
-}
-
-body.dark-mode .landing-container {
-  background-color: #555;
-}
-
-body.dark-mode button {
-  background-color: #1e88e5;
-}
-
-body.dark-mode .primary-btn {
-  background-color: #0056b3;
-}
-
-body.dark-mode .secondary-btn {
-  background-color: transparent;
-  color: #ddd;
-  border: 2px solid #ddd;
+  color: #ffffff;
 }

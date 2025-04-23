@@ -215,7 +215,7 @@ const modelMaxOutputs = {
   o1: 32268, // -500 from max: 32,768
   'o1-mini': 65136, // -500 from max: 65,536
   'o1-preview': 32268, // -500 from max: 32,768
-  system_default: 1024,
+  system_default: 4096,
 };
 
 const anthropicMaxOutputs = {
